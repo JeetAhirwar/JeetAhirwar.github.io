@@ -8,9 +8,9 @@ const About = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const stats = [
-    { icon: Briefcase, label: "Years Experience", value: "5+" },
+    { icon: Briefcase, label: "Years Experience", value: "0+" },
     { icon: Award, label: "Certifications", value: "4" },
-    { icon: MapPin, label: "Location", value: "NYC" },
+    { icon: MapPin, label: "Location", value: "BHOPAL" },
   ];
 
   return (

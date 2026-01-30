@@ -178,7 +178,7 @@ const Contact = () => {
             {/* Location */}
             <div className="glass-card p-6">
               <p className="text-sm text-muted-foreground mb-1 font-mono">Location</p>
-              <p className="text-foreground">New York City, USA</p>
+              <p className="text-foreground">Madhya Pradesh, India</p>
               <p className="text-sm text-muted-foreground mt-1">Remote-friendly</p>
             </div>
           </motion.div>
