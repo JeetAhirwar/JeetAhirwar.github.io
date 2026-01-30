@@ -10,7 +10,7 @@ const About = () => {
   const stats = [
     { icon: Briefcase, label: "Years Experience", value: "0+" },
     { icon: Award, label: "Certifications", value: "4" },
-    { icon: MapPin, label: "Location", value: "BHOPAL" },
+    { icon: MapPin, label: "Location", value: "Bhopal" },
   ];
 
   return (
@@ -46,19 +46,13 @@ const About = () => {
 
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                As a dedicated SOC Analyst with over 5 years of experience, I specialize in 
-                monitoring, detecting, and responding to cybersecurity threats. My expertise 
-                spans across SIEM platforms, threat hunting, and incident response.
+                I’m an MCA student with a strong interest in SOC operations and cybersecurity. I’m learning how security alerts are monitored, logs are analyzed, and incidents are identified using SIEM tools and SOC workflows.
               </p>
               <p>
-                I'm passionate about building robust security operations and mentoring 
-                junior analysts. Currently focused on advancing threat intelligence 
-                automation and improving detection capabilities.
+                I have practiced phishing analysis, basic malware understanding, network security concepts, and threat detection through labs, simulations, and self-learning. I enjoy analyzing security events, understanding how attacks happen, and improving my skills step by step.
               </p>
               <p>
-                When I'm not hunting threats, you'll find me contributing to open-source 
-                security tools, writing detection rules, and staying updated with the 
-                latest TTPs in the threat landscape.
+                I’m a quick learner, detail-oriented, and motivated to start my career as a SOC Analyst, where I can learn from real-world environments and grow into a strong security professional.
               </p>
             </div>
 
