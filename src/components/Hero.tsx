@@ -56,7 +56,7 @@ const Hero = () => {
                   transition={{ delay: 0.5 }}
                   className="cyber-text cyber-glow"
                 >
-                  Alex Chen
+                  Jeet Ahirwar
                 </motion.span>
               </h1>
 
