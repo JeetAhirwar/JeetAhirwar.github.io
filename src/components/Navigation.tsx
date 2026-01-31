@@ -38,7 +38,7 @@ const Navigation = () => {
           <a href="#" className="flex items-center gap-2 group">
             <Shield className="w-6 h-6 text-cyber-green group-hover:scale-110 transition-transform" />
             <span className="font-mono font-semibold text-foreground">
-              GHOST<span className="text-cyber-green">_</span>CODE
+              J<span className="text-cyber-green">_</span>A
             </span>
           </a>
 
