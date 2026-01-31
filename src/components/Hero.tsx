@@ -50,32 +50,14 @@ const Hero = () => {
                 >
                   Hi, I'm{" "}
                 </motion.span>
-                {/* <motion.span
+                <motion.span
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
                   className="cyber-text cyber-glow"
                 >
                   Jeet Ahirwar
-                </motion.span> */}
-               <motion.span
-  initial={{ opacity: 1 }}
-  animate={{ opacity: 1 }}
-  className="typing cyber-glow"
->
-  {Array.from("Jeet Ahirwar").map((letter, index) => (
-    <motion.span
-      key={index}
-      initial={{ opacity: 0, y: "0.25em" }}
-      animate={{ opacity: 1, y: "0em" }}
-      transition={{ delay: 0.5 + index * 0.1 }}
-    >
-      {letter}
-    </motion.span>
-  ))}
-  <span className="cursor">|</span>
-</motion.span>
-
+                </motion.span>
               </h1>
 
               <div className="flex flex-wrap gap-2 text-2xl md:text-3xl font-mono font-medium text-muted-foreground">
