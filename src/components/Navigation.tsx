@@ -37,8 +37,11 @@ const Navigation = () => {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group">
             <Shield className="w-6 h-6 text-cyber-green group-hover:scale-110 transition-transform" />
-            <span className="font-mono font-semibold text-foreground">
-              J<span className="text-cyber-green">_</span>A
+            {/* <span className="font-mono font-semibold text-foreground">
+              J<span className="text-cyber-green">ee</span>t
+            </span> */}
+            <span className="vyre-logo">
+              V<span className="accent">Y</span>RE
             </span>
           </a>
 
