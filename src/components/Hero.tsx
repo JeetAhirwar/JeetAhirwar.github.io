@@ -50,14 +50,23 @@ const Hero = () => {
                 >
                   Hi, I'm{" "}
                 </motion.span>
-                <motion.span
+                {/* <motion.span
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
                   className="cyber-text cyber-glow"
                 >
                   Jeet Ahirwar
+                </motion.span> */}
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                  className="typing cyber-glow"
+                  >
+                  Jeet Ahirwar
                 </motion.span>
+
               </h1>
 
               <div className="flex flex-wrap gap-2 text-2xl md:text-3xl font-mono font-medium text-muted-foreground">

@@ -40,3 +40,22 @@
 .read-the-docs {
   color: #888;
 }
+
+
+/* Add this in your CSS */
+.typing {
+  display: inline-block;
+  border-right: 2px solid #0ff; /* cursor */
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 2s steps(12) forwards, blink 0.7s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 12ch; } /* number of characters in your text */
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}

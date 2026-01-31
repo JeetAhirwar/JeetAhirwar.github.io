@@ -73,7 +73,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-cyber-green/50 focus:ring-1 focus:ring-cyber-green/50 transition-all font-mono"
-                  placeholder="John Doe"
+                  placeholder="Enter your name"
                 />
               </div>
 
@@ -88,7 +88,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-cyber-green/50 focus:ring-1 focus:ring-cyber-green/50 transition-all font-mono"
-                  placeholder="john@example.com"
+                  placeholder="example@gmail.com"
                 />
               </div>
 
@@ -152,8 +152,8 @@ const Contact = () => {
                 <p><span className="text-cyber-green">$</span> cat availability.txt</p>
                 <p className="pl-4">Currently open to:</p>
                 <p className="pl-4 text-foreground">→ Full-time SOC roles</p>
-                <p className="pl-4 text-foreground">→ Security consulting</p>
-                <p className="pl-4 text-foreground">→ Speaking opportunities</p>
+                <p className="pl-4 text-foreground">→ SOC Intern</p>
+                <p className="pl-4 text-foreground">→ Incident Response Analyst</p>
                 <p className="mt-4"><span className="text-cyber-green">$</span> <span className="animate-blink">_</span></p>
               </div>
             </div>
@@ -180,6 +180,7 @@ const Contact = () => {
               <p className="text-sm text-muted-foreground mb-1 font-mono">Location</p>
               <p className="text-foreground">Madhya Pradesh, India</p>
               <p className="text-sm text-muted-foreground mt-1">Remote-friendly</p>
+              <p className="text-sm text-muted-foreground mt-1">On-site</p>
             </div>
           </motion.div>
         </div>

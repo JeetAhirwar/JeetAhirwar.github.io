@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="flex items-center gap-2">
             <Shield className="w-5 h-5 text-cyber-green" />
             <span className="font-mono text-sm text-muted-foreground">
-              AC<span className="text-cyber-green">_</span>SEC © {currentYear}
+              N<span className="text-cyber-green">Y</span>XOR © {currentYear}
             </span>
           </div>
 
