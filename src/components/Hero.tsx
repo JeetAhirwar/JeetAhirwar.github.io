@@ -41,12 +41,12 @@ const Hero = () => {
                 &gt; whoami
               </motion.p>
               
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 <motion.span
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
-                  className="text-foreground"
+                  className="text-foreground satisfy-regular"
                 >
                   Hi, I'm{" "}
                 </motion.span>
@@ -54,13 +54,13 @@ const Hero = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
-                  className="cyber-text cyber-glow"
+                  className="cyber-text cyber-glow satisfy-regular"
                 >
                   Jeet Ahirwar
                 </motion.span>
               </h1>
 
-              <div className="flex flex-wrap gap-2 text-1xl md:text-2xl font-mono font-medium text-muted-foreground">
+              <div className="flex flex-wrap gap-2 text-2xl md:text-3xl font-mono font-medium text-muted-foreground">
                 {titleWords.map((word, index) => (
                   <motion.span
                     key={word}

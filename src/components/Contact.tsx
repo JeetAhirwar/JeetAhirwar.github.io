@@ -29,9 +29,9 @@ const Contact = () => {
   };
 
   const socialLinks = [
-    { icon: Github, label: "GitHub", href: "#" },
-    { icon: Linkedin, label: "LinkedIn", href: "#" },
-    { icon: Mail, label: "Email", href: "mailto:alex@example.com" },
+    { icon: Github, label: "GitHub", href: "https://github.com/JEETAHIRWAR" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/jeetahirwar/" },
+    { icon: Mail, label: "Email", href: "mailto:jeetahirwar664@gmail.com" },
   ];
 
   return (
