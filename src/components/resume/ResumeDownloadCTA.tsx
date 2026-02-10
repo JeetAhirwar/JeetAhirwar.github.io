@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Download, Mail } from "lucide-react";
+import { HashLink } from "react-router-hash-link";
 
 const ResumeDownloadCTA = () => {
   const ref = useRef(null);
@@ -32,13 +33,13 @@ const ResumeDownloadCTA = () => {
               <Download className="w-4 h-4" />
               Download Resume
             </a>
-            <a
-              href="/#contact"
+            <HashLink
+              to="/#contact"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-cyber-green/30 text-foreground font-mono font-medium transition-all hover:bg-cyber-green/10 hover:border-cyber-green/50"
             >
               <Mail className="w-4 h-4" />
               Contact Me
-            </a>
+            </HashLink>
           </div>
         </motion.div>
       </div>

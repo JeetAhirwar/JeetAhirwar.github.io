@@ -98,7 +98,7 @@ const About = () => {
             >
               <p className="text-sm text-muted-foreground mb-3">Certifications</p>
               <div className="space-y-2">
-                {["CompTIA Security+", "CySA+", "Splunk Certified", "Azure SC-200"].map((cert) => (
+                {["Junior Cybersecurity Analyst Career Path", "Introduction to Cybersecurity ", "Cybersecurity Essentials ", "Foundations of Cybersecurity "].map((cert) => (
                   <div key={cert} className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-cyber-green" />
                     <span className="text-sm font-mono">{cert}</span>
