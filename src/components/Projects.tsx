@@ -8,48 +8,56 @@ const Projects = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [activeProject, setActiveProject] = useState<number | null>(null);
 
-  const projects = [
-    {
-      title: "ThreatHunter Dashboard",
-      description: "Real-time threat hunting dashboard built with Python and Splunk. Aggregates IOCs from multiple sources and correlates with internal telemetry.",
-      longDescription: "A comprehensive threat hunting platform that integrates with VirusTotal, AbuseIPDB, and internal SIEM. Features automated correlation, ML-based anomaly detection, and custom alerting workflows.",
-      icon: Eye,
-      tags: ["Python", "Splunk", "REST API", "Docker"],
-      github: "#",
-      demo: "#",
-      featured: true,
-    },
-    {
-      title: "SOC Automation Framework",
-      description: "SOAR-inspired automation framework for common SOC tasks. Reduces response time by 60% through automated triage and enrichment.",
-      longDescription: "Modular automation framework with 50+ playbooks for incident response. Includes IP reputation checks, user activity correlation, and automated containment actions.",
-      icon: Cpu,
-      tags: ["Python", "SOAR", "Automation", "APIs"],
-      github: "#",
-      demo: null,
-      featured: true,
-    },
-    {
-      title: "Detection Rule Library",
-      description: "Open-source repository of 200+ Sigma/YARA rules for detecting common and emerging threats across enterprise environments.",
-      longDescription: "Community-driven detection rules mapped to MITRE ATT&CK framework. Includes automated testing pipeline and coverage analysis tools.",
-      icon: Shield,
-      tags: ["Sigma", "YARA", "MITRE ATT&CK", "CI/CD"],
-      github: "#",
-      demo: null,
-      featured: false,
-    },
-    {
-      title: "Phishing Analysis Tool",
-      description: "Automated phishing email analysis tool with sandbox integration, URL reputation checking, and ML-based classification.",
-      longDescription: "End-to-end phishing analysis pipeline with header analysis, attachment sandboxing, and threat intelligence enrichment. Processes 500+ suspicious emails daily.",
-      icon: Lock,
-      tags: ["Python", "ML", "API Integration", "Automation"],
-      github: "#",
-      demo: "#",
-      featured: false,
-    },
-  ];
+const projects = [
+  {
+    title: "SIEM Log Analysis & Alert Triage",
+    description:
+      "Analyzed security logs in Splunk to identify suspicious activities and understand SOC alert workflows.",
+    longDescription:
+      "This project focuses on basic SOC operations using Splunk. I worked with sample log data to monitor alerts, identify failed login attempts, suspicious IP addresses, and understand how alerts are triaged and documented in a SOC environment.",
+    icon: Eye,
+    tags: ["Splunk", "Log Analysis", "SOC Monitoring", "MITRE ATT&CK"],
+    github: "#",
+    demo: "#",
+    featured: true,
+  },
+  {
+    title: "Network Security Simulation using Cisco Packet Tracer",
+    description:
+      "Simulated a secure network environment and analyzed common network threats using Cisco Packet Tracer.",
+    longDescription:
+      "Designed a small enterprise network with routers, switches, and end devices. Configured basic security settings, analyzed traffic flow, identified misconfigurations, and simulated network-based attacks to understand how SOC teams detect network threats.",
+    icon: Cpu,
+    tags: ["Cisco Packet Tracer", "Network Security", "TCP/IP", "DNS"],
+    github: "#",
+    demo: null,
+    featured: true,
+  },
+  {
+    title: "Network Traffic Analysis using Wireshark",
+    description:
+      "Captured and analyzed network traffic to detect abnormal and suspicious behavior.",
+    longDescription:
+      "Used Wireshark to capture live and sample network traffic. Analyzed protocols like HTTP, DNS, and TCP to identify unusual patterns, suspicious connections, and potential security issues commonly investigated by SOC analysts.",
+    icon: Shield,
+    tags: ["Wireshark", "Packet Analysis", "Network Monitoring"],
+    github: "#",
+    demo: null,
+    featured: false,
+  },
+  {
+    title: "Incident Response Lifecycle Simulation",
+    description:
+      "Practiced the incident response process from detection to closure using simulated security incidents.",
+    longDescription:
+      "Worked through a simulated security incident by following the incident response lifecycle: detection, analysis, containment, eradication, recovery, and documentation. This project helped me understand how SOC teams handle and report incidents.",
+    icon: Lock,
+    tags: ["Incident Response", "SOC Workflow", "Documentation"],
+    github: "#",
+    demo: "#",
+    featured: false,
+  },
+];
 
   return (
     <section id="projects" className="py-24 relative" ref={ref}>
