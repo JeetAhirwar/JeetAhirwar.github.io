@@ -27,7 +27,8 @@ const ResumeDownloadCTA = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="#"
+              href="/resume.pdf"
+              download="Jeet_Ahirwar_Resume.pdf"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-cyber-green text-primary-foreground font-mono font-medium transition-all hover:shadow-[0_0_30px_hsl(var(--cyber-green)/0.4)]"
             >
               <Download className="w-4 h-4" />
