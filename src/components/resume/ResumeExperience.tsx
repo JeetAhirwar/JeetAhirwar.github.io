@@ -13,15 +13,12 @@ const ResumeExperience = () => {
       company: "NIIT Foundation",
       period: "Jun 2025 – July 2025",
       highlights: [
-<<<<<<< HEAD
         "Completed foundational training in cybersecurity concepts and SOC fundamentals through live instructor-led sessions.",
         "Gained hands-on exposure to network security and threat scenarios using Cisco Packet Tracer",
         "Successfully completed Cisco Networking Academy courses and cleared final assessments",
-=======
         "Gained foundational cybersecurity knowledge and SOC operations training",
         "Practiced hands-on network security configuration using Cisco Packet Tracer",
         "Successfully completed Cisco Networking Academy certification courses",
->>>>>>> c896c5330aaeea48a6d50523630bc34c7094cbfb
         "Applied cybersecurity concepts in a practical network simulation project",
       ],
     },
