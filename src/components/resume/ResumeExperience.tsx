@@ -9,24 +9,14 @@ const ResumeExperience = () => {
 
   const experiences = [
     {
-      role: "SOC Analyst Intern",
-      company: "CyberDefend Labs",
-      period: "Jan 2025 – Present",
+      role: "Cyber Security Intern",
+      company: "NIIT Foundation",
+      period: "Jun 2025 – July 2025",
       highlights: [
-        "Monitored and triaged 200+ daily alerts using Splunk and Microsoft Sentinel",
-        "Developed 15+ custom detection rules mapped to MITRE ATT&CK framework",
-        "Assisted in 3 incident response investigations involving phishing and malware",
-        "Automated repetitive enrichment workflows, reducing triage time by 30%",
-      ],
-    },
-    {
-      role: "Cybersecurity Lab Researcher",
-      company: "University Cyber Lab",
-      period: "Aug 2023 – Dec 2024",
-      highlights: [
-        "Configured and maintained a home lab with Splunk, pfSense, and Security Onion",
-        "Performed network traffic analysis and identified simulated APT behaviors",
-        "Documented findings and presented threat reports to faculty advisors",
+        "Gained foundational cybersecurity knowledge and SOC operations training",
+        "Practiced hands-on network security configuration using Cisco Packet Tracer",
+        "Successfully completed Cisco Networking Academy certification courses",
+        "Applied cybersecurity concepts in a practical network simulation project",
       ],
     },
   ];
