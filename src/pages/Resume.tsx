@@ -5,6 +5,7 @@ import ResumeSummary from "@/components/resume/ResumeSummary";
 import ResumeSkills from "@/components/resume/ResumeSkills";
 import ResumeFeaturedProjects from "@/components/resume/ResumeFeaturedProjects";
 import ResumeExperience from "@/components/resume/ResumeExperience";
+import ResumeEducation from "@/components/resume/ResumeEducation";
 import ResumeCertifications from "@/components/resume/ResumeCertifications";
 import ResumeDownloadCTA from "@/components/resume/ResumeDownloadCTA";
 
@@ -18,6 +19,7 @@ const Resume = () => {
         <ResumeSkills />
         <ResumeFeaturedProjects />
         <ResumeExperience />
+        <ResumeEducation />
         <ResumeCertifications />
         <ResumeDownloadCTA />
       </main>
