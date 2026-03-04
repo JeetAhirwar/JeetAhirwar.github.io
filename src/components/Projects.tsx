@@ -17,8 +17,8 @@ const projects = [
       "This project focuses on basic SOC operations using Splunk. I worked with sample log data to monitor alerts, identify failed login attempts, suspicious IP addresses, and understand how alerts are triaged and documented in a SOC environment.",
     icon: Eye,
     tags: ["Splunk", "Log Analysis", "SOC Monitoring", "MITRE ATT&CK"],
-    github: "#",
-    demo: "#",
+    github: "https://github.com/JEETAHIRWAR/Brute-Force-Detection-Splunk-IR-Lab",
+    demo: "https://jeetahirwar.lovable.app/blog/siem-log-analysis-alert-triage",
     featured: true,
   },
   {
@@ -126,6 +126,7 @@ const projects = [
                   <a
                     href={project.github}
                     onClick={(e) => e.stopPropagation()}
+                    target="_blank"
                     className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-cyber-green transition-colors"
                   >
                     <Github className="w-4 h-4" />
@@ -135,6 +136,7 @@ const projects = [
                     <a
                       href={project.demo}
                       onClick={(e) => e.stopPropagation()}
+                      target="_blank"
                       className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-cyber-green transition-colors"
                     >
                       <ExternalLink className="w-4 h-4" />
@@ -161,7 +163,8 @@ const projects = [
           className="text-center mt-8"
         >
           <a
-            href="#"
+            href="https://github.com/JEETAHIRWAR?tab=repositories"
+            target="_blank"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-cyber-green transition-colors font-mono text-sm"
           >
             View all projects on GitHub
