@@ -69,7 +69,7 @@ docker ps
 \`\`\`
 
 📸 docker ps showing container running  
-![docker ps showing container running](/public/Project1/Screenshot-1.png)
+![docker ps showing container running](../public/Project1/Screenshot-1.png)
 
 ---
 
@@ -104,7 +104,7 @@ Reason:
 Low security disables brute force protection for testing.
 
 📸 DVWA login page  
-![DVWA login page](/public/Project1/Screenshot-2.png)
+![DVWA login page](/Project1/Screenshot-2.png)
 
 ---
 
@@ -122,7 +122,7 @@ Attack Source:
 Hydra generated multiple rapid login attempts.
 
 📸 Hydra attack running  
-![Hydra attack running](/public/Project1/Screenshot-3.png)
+![Hydra attack running](/Project1/Screenshot-3.png)
 
 ---
 

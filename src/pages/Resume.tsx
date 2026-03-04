@@ -16,11 +16,11 @@ const Resume = () => {
       <main>
         <ResumeHero />
         <ResumeSummary />
-        <ResumeSkills />
-        <ResumeFeaturedProjects />
+        {/* <ResumeSkills /> */}
+        {/* <ResumeFeaturedProjects /> */}
         <ResumeExperience />
         <ResumeEducation />
-        <ResumeCertifications />
+        {/* <ResumeCertifications /> */}
         <ResumeDownloadCTA />
       </main>
       <Footer />
