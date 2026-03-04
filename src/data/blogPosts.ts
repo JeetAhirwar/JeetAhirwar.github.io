@@ -10,6 +10,307 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+  slug: "web-attack-detection-lab1",
+  title: "Web Attack Detection Lab: Brute Force Detection using Docker + Ubuntu + Kali",
+  summary:
+    "Built a structured SOC-level lab to simulate a brute force web attack using Hydra and detect it through Apache log analysis inside a Docker-based DVWA environment.",
+  date: "3rd Mar 2026",
+  tags: ["SIEM", "SOC", "Log Analysis", "Brute Force", "Blue Team"],
+  readTime: "10 min read",
+  content: `## 🔥 Project Overview
+
+Instead of random practice, I built a structured SOC-level detection lab from scratch.
+
+Goal:
+
+- Simulate a real web brute force attack
+- Capture Apache logs
+- Analyze attack behavior
+- Detect brute force activity
+- Document incident like a SOC analyst
+
+Lab Environment:
+
+- Attacker: Kali Linux (192.168.223.156)
+- Target: Ubuntu Server (192.168.223.145)
+- Application: DVWA (Docker container)
+- Port: 8080
+- Log Source: Apache access.log
+
+---
+
+## 🏗 Phase 1: Lab Setup
+
+Installed Docker on Ubuntu:
+
+\`\`\`bash
+sudo apt update
+sudo apt install docker.io -y
+sudo systemctl start docker
+\`\`\`
+
+Verified Docker:
+
+\`\`\`bash
+docker --version
+docker ps
+\`\`\`
+
+Deployed DVWA:
+
+\`\`\`bash
+docker run -d -p 8080:80 vulnerables/web-dvwa
+\`\`\`
+
+Verified container running:
+
+\`\`\`bash
+docker ps
+\`\`\`
+
+📸 docker ps showing container running  
+![docker ps showing container running](/public/Project1/Screenshot-1.png)
+
+---
+
+### 🔴 Mistake #1: Port Mapping Issue
+
+Initially, DVWA was not accessible.
+
+Cause:  
+Incorrect port mapping.
+
+Fix:  
+Re-ran container using proper -p 8080:80 mapping.
+
+Lesson:  
+Always verify container port exposure.
+
+---
+
+## 🌐 Phase 2: Accessing DVWA
+
+Opened:
+
+http://192.168.223.145:8080
+
+Login:  
+admin / password
+
+Navigated to:
+DVWA Security → Set to LOW
+
+Reason:
+Low security disables brute force protection for testing.
+
+📸 DVWA login page  
+![DVWA login page](/public/Project1/Screenshot-2.png)
+
+---
+
+## ⚔ Phase 3: Initial Brute Force Test (Red Team)
+
+Executed Hydra from Kali:
+
+\`\`\`bash
+hydra -l admin -p password 192.168.223.145 -s 8080 http-get-form "/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:Username and/or password incorrect"
+\`\`\`
+
+Attack Source:
+192.168.223.156
+
+Hydra generated multiple rapid login attempts.
+
+📸 Hydra attack running  
+![Hydra attack running](/public/Project1/Screenshot-3.png)
+
+---
+
+### 🔴 Mistake #2: Incorrect Hydra Syntax
+
+Initially attack failed because:
+
+- Wrong form path
+- Missing failure message string
+
+After correcting form path and response condition, attack executed successfully.
+
+Lesson:
+Understanding HTTP request structure is critical in brute force simulations.
+
+---
+
+## 🚀 Phase 3.1: Real Brute Force Using Wordlist
+
+To simulate realistic attack behavior, used rockyou wordlist.
+
+### Step 1 – Verify Wordlist
+
+\`\`\`bash
+ls /usr/share/wordlists/
+\`\`\`
+
+If compressed:
+
+\`\`\`bash
+sudo gunzip /usr/share/wordlists/rockyou.txt.gz
+\`\`\`
+
+### Step 2 – Launch Full Brute Force
+
+\`\`\`bash
+hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.223.145 -s 8080 http-get-form "/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:Username and/or password incorrect"
+\`\`\`
+
+Notice:
+
+- -P (capital P) = password list mode
+- Thousands of password attempts executed automatically
+
+This simulates real-world credential stuffing / brute force activity.
+
+---
+
+## 🛡 Phase 4: Live Log Monitoring (Blue Team)
+
+Entered DVWA container:
+
+\`\`\`bash
+docker exec -it dd9c04bb55fc /bin/bash
+\`\`\`
+
+Checked Apache log directory:
+
+\`\`\`bash
+ls /var/log/apache2
+\`\`\`
+
+Found:
+
+- access.log
+- error.log
+
+Started real-time monitoring:
+
+\`\`\`bash
+tail -f /var/log/apache2/access.log
+\`\`\`
+
+Opened new Kali terminal and launched Hydra again.
+
+Now live requests appeared inside access.log.
+
+Example log entry:
+
+192.168.223.156 - - [03/Mar/2026:20:10:01 +0000] "GET /vulnerabilities/brute/?username=admin&password=123 HTTP/1.1" 200 4523 "Mozilla/5.0 (Hydra)"
+
+This confirmed:
+
+- Attacker IP visible
+- Timestamp recorded
+- Username & password visible
+- HTTP status captured
+- User-Agent shows Hydra
+
+📸 Screenshot 4: Apache log directory listing  
+📸 Screenshot 5: Live brute force log entries
+
+---
+
+## 📊 Phase 5: Counting Attack Attempts
+
+Filtered brute force attempts:
+
+\`\`\`bash
+grep "vulnerabilities/brute" /var/log/apache2/access.log
+\`\`\`
+
+Counted attempts per IP:
+
+\`\`\`bash
+grep "vulnerabilities/brute" /var/log/apache2/access.log | awk '{print $1}' | sort | uniq -c
+\`\`\`
+
+Output:
+
+99 192.168.223.156
+
+This confirmed:
+
+99 login attempts from a single IP.
+
+📸 Screenshot 6: Frequency output showing 99 attempts
+
+---
+
+## 🧠 Detection Logic (SIEM Simulation)
+
+Defined threshold rule:
+
+If login attempts from same IP > 10 within short duration  
+→ Trigger brute force alert
+
+Actual attempts:
+99
+
+Result:
+Attack Successfully Detected
+
+This simulates SIEM correlation-based brute force detection.
+
+---
+
+## 📄 Incident Summary
+
+Attack Type: HTTP Brute Force  
+Tool Used: Hydra  
+Attacker IP: 192.168.223.156  
+Target: DVWA on Port 8080  
+Log Source: Apache access.log  
+Total Attempts: 99  
+Detection Status: Successful  
+
+---
+
+## 🛠 Recommendations
+
+- Enable account lockout policy
+- Implement rate limiting
+- Deploy Fail2Ban
+- Add Web Application Firewall
+- Forward logs to SIEM (Splunk / ELK)
+
+---
+
+## 📘 Lessons Learned
+
+- Docker networking must be verified
+- Hydra requires precise form configuration
+- Real brute force involves wordlists
+- Log monitoring (tail -f) is critical for detection
+- Frequency-based IP analysis is effective for brute force detection
+
+---
+
+## ✅ Project Completion
+
+This lab successfully demonstrated:
+
+✔ Attack simulation  
+✔ Wordlist-based brute force  
+✔ Live log capture  
+✔ Manual detection  
+✔ SIEM-style correlation logic  
+✔ Incident documentation  
+
+This marks the completion of the Web Attack Detection Lab.
+
+---
+
+⚠ Conducted in a controlled lab environment for educational purposes only.
+`
+},
+{
     slug: "web-attack-detection-lab",
     title: "Web Attack Detection Lab: Brute Force Detection using Docker + Ubuntu + Kali",
     summary:
@@ -55,8 +356,8 @@ Deployed DVWA:
 docker run -d -p 8080:80 vulnerables/web-dvwa
 \`\`\`
 
-📸 Screenshot 1:
-docker ps showing container running
+📸 docker ps showing container running
+![docker ps showing container running](/public/Project1/Screenshot-1.png)
 
 ---
 
@@ -86,8 +387,9 @@ admin / password
 
 Security level set to LOW.
 
-📸 Screenshot 2:
-DVWA login page
+📸 DVWA login page
+![DVWA login page](/public/Project1/Screenshot-2.png)
+
 
 ---
 
@@ -104,8 +406,9 @@ Attack Source:
 
 Hydra generated multiple rapid login attempts.
 
-📸 Screenshot 3:
-Hydra attack running
+📸 Hydra attack running
+![Hydra attack running](/public/Project1/Screenshot-3.png)
+
 
 ---
 
@@ -552,97 +855,5 @@ After building 20+ rules, I created a Splunk dashboard mapping detection coverag
 ---
 
 *All rules are available in my GitHub detection-rules repository.*`,
-  },
-  {
-    slug: "home-lab-apt29-simulation",
-    title: "Home Lab Chronicles: Simulating APT29 with Atomic Red Team",
-    summary:
-      "Documenting my experience running APT29 emulation in a contained environment using Atomic Red Team, Security Onion, and Sysmon logging.",
-    date: "Nov 2024",
-    tags: ["Threat Emulation", "Blue Team"],
-    readTime: "10 min read",
-    content: `## The Goal
-
-I wanted to understand APT29 (Cozy Bear) tactics by emulating their techniques in a safe lab environment and seeing what defenders actually see in their logs.
-
-## Lab Architecture
-
-\`\`\`
-┌─────────────┐     ┌──────────────┐     ┌─────────────────┐
-│  Attacker   │────▶│  Windows 10  │────▶│  Security Onion  │
-│  (Kali)     │     │  (Target)    │     │  (SIEM/IDS)      │
-└─────────────┘     └──────────────┘     └─────────────────┘
-                          │
-                    Sysmon + WinRM
-                    Event Forwarding
-\`\`\`
-
-### Components
-
-- **Kali Linux** — Attack machine running Atomic Red Team
-- **Windows 10 VM** — Target with Sysmon, PowerShell logging, and WinRM
-- **Security Onion** — Network monitoring with Suricata + Zeek, log aggregation
-- **Splunk Free** — Additional log analysis
-
-## APT29 Techniques Emulated
-
-I focused on techniques from the [MITRE ATT&CK APT29 page](https://attack.mitre.org/groups/G0016/):
-
-### 1. Spearphishing Link (T1566.002)
-
-Simulated a user clicking a malicious link that downloads a PowerShell script:
-
-\`\`\`powershell
-Invoke-AtomicTest T1566.002
-\`\`\`
-
-**What I saw in logs:**
-- Sysmon Event ID 1: PowerShell spawned from browser process
-- Sysmon Event ID 3: Outbound HTTP connection to download server
-
-### 2. Credential Dumping with Mimikatz (T1003.001)
-
-\`\`\`powershell
-Invoke-AtomicTest T1003.001 -TestNumbers 1
-\`\`\`
-
-**What I saw in logs:**
-- Sysmon Event ID 10: Process access to \`lsass.exe\`
-- Windows Security Event 4656: Handle requested to LSASS
-
-### 3. Scheduled Task Persistence (T1053.005)
-
-\`\`\`powershell
-Invoke-AtomicTest T1053.005 -TestNumbers 1
-\`\`\`
-
-**What I saw in logs:**
-- Windows Event ID 4698: Scheduled task created
-- Sysmon Event ID 1: \`schtasks.exe\` execution
-
-## Detection Gaps Found
-
-During the simulation, I discovered:
-
-1. **PowerShell Script Block Logging** wasn't enabled — fixed this immediately
-2. **Sysmon config** was missing rules for WMI event subscriptions
-3. **Network-level detection** caught the C2 traffic that host-based logs missed
-
-## What I Learned
-
-- **Blue team visibility** depends heavily on logging configuration
-- Running attack simulations reveals **blind spots** you'd never find otherwise
-- **Sysmon + PowerShell logging + network monitoring** provides layered detection
-- APT29's techniques are sophisticated but **detectable** with proper instrumentation
-
-## Next Steps
-
-- Expand emulation to cover APT28 and FIN7
-- Build automated detection validation pipeline
-- Create a detection coverage heat map
-
----
-
-*This lab was run in an isolated virtual environment with no connection to production networks.*`,
   },
 ];
