@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { ExternalLink, Github, ChevronRight, Shield, Eye, Cpu, Lock } from "lucide-react";
+import { ExternalLink, Github, ChevronRight, Shield, Eye, Cpu, Lock, Mail, Clock } from "lucide-react";
 
 const Projects = () => {
   const ref = useRef(null);
@@ -11,50 +11,62 @@ const Projects = () => {
 const projects = [
   {
     title: "SIEM Log Analysis & Alert Triage",
+    type: "Hands-on Lab",
     description:
-      "Analyzed security logs in Splunk to identify suspicious activities and understand SOC alert workflows.",
+      "Installed Splunk and analyzed Windows authentication logs to identify suspicious login activity. Created searches and dashboards to investigate failed logon events and understand alert triage fundamentals.",
     longDescription:
-      "This project focuses on basic SOC operations using Splunk. I worked with sample log data to monitor alerts, identify failed login attempts, suspicious IP addresses, and understand how alerts are triaged and documented in a SOC environment.",
+      "Installed Splunk and analyzed Windows authentication logs to identify suspicious login activity. Created searches and dashboards to investigate failed logon events (Event ID 4625), built triage workflows, and mapped behavior to MITRE ATT&CK techniques.",
     icon: Eye,
-    tags: ["Splunk", "Log Analysis", "SOC Monitoring", "MITRE ATT&CK"],
-    github: "https://github.com/JEETAHIRWAR/Brute-Force-Detection-Splunk-IR-Lab",
-    demo: "https://jeetahirwar.lovable.app/blog/siem-log-analysis-alert-triage",
+    tags: ["Splunk", "Windows Logs", "Event ID 4625", "Alert Triage", "MITRE ATT&CK"],
+    github: "https://github.com/JeetAhirwar/SIEM-BruteForce-Detection-Lab",
     featured: true,
   },
   {
-    title: "Network Security Simulation using Cisco Packet Tracer",
+    title: "Web Attack Detection Lab: Brute Force Detection using DVWA",
+    type: "Blue Team Lab",
     description:
-      "Simulated a secure network environment and analyzed common network threats using Cisco Packet Tracer.",
+      "Built a practical lab using Ubuntu, Kali Linux, DVWA, and Hydra to simulate brute-force attacks and monitor detection opportunities through server logs.",
     longDescription:
-      "Designed a small enterprise network with routers, switches, and end devices. Configured basic security settings, analyzed traffic flow, identified misconfigurations, and simulated network-based attacks to understand how SOC teams detect network threats.",
-    icon: Cpu,
-    tags: ["Cisco Packet Tracer", "Network Security", "TCP/IP", "DNS"],
-    github: "#",
-    demo: null,
+      "Deployed DVWA on Ubuntu and used Hydra from Kali Linux to simulate brute-force attacks. Monitored Apache access logs, performed frequency analysis on attacker IPs, and validated detection logic similar to SIEM correlation rules.",
+    icon: Shield,
+    tags: ["DVWA", "Hydra", "Apache Logs", "Linux", "Threat Detection"],
+    github: "https://github.com/JeetAhirwar/Brute-Force-Detection-Splunk-IR-Lab",
+    featured: true,
+  },
+  {
+    title: "Phishing Email Analysis & Incident Investigation",
+    type: "Threat Investigation Lab",
+    description:
+      "Conducted analysis of sample phishing emails to identify malicious indicators and understand email-based threat investigation fundamentals.",
+    longDescription:
+      "Examined email headers, suspicious URLs, sender reputation, and attachment behavior. Used VirusTotal to validate potentially malicious artifacts and documented investigation findings with mitigation recommendations. Status: Learning Project / Case Study.",
+    icon: Lock,
+    tags: ["Phishing Analysis", "Email Header Analysis", "IOC Investigation", "VirusTotal", "Threat Intelligence", "Incident Investigation"],
+    github: null,
     featured: true,
   },
   {
     title: "Network Traffic Analysis using Wireshark",
+    type: "Traffic Analysis Lab",
     description:
-      "Captured and analyzed network traffic to detect abnormal and suspicious behavior.",
+      "Captured and analyzed packets to identify protocols, suspicious communication patterns, and indicators of malicious activity.",
     longDescription:
-      "Used Wireshark to capture live and sample network traffic. Analyzed protocols like HTTP, DNS, and TCP to identify unusual patterns, suspicious connections, and potential security issues commonly investigated by SOC analysts.",
-    icon: Shield,
-    tags: ["Wireshark", "Packet Analysis", "Network Monitoring"],
-    github: "#",
-    demo: null,
+      "Used Wireshark to capture live traffic and analyze protocols including TCP/IP, DNS, and HTTP. Identified unusual patterns and suspicious connections relevant to SOC-level threat hunting.",
+    icon: Cpu,
+    tags: ["Wireshark", "Packet Analysis", "TCP/IP", "Threat Hunting"],
+    github: null,
     featured: false,
   },
   {
-    title: "Incident Response Lifecycle Simulation",
+    title: "Network Security Simulation using Cisco Packet Tracer",
+    type: "Simulation Lab",
     description:
-      "Practiced the incident response process from detection to closure using simulated security incidents.",
+      "Designed secure network topologies and explored fundamental security controls using Cisco Packet Tracer simulations.",
     longDescription:
-      "Worked through a simulated security incident by following the incident response lifecycle: detection, analysis, containment, eradication, recovery, and documentation. This project helped me understand how SOC teams handle and report incidents.",
-    icon: Lock,
-    tags: ["Incident Response", "SOC Workflow", "Documentation"],
-    github: "#",
-    demo: "#",
+      "Modeled enterprise network segments with routers, switches, and access controls. Applied ACLs and basic security configurations, and simulated network-based attacks to study detection opportunities.",
+    icon: Shield,
+    tags: ["Cisco Packet Tracer", "Network Security", "ACL", "Switching"],
+    github: null,
     featured: false,
   },
 ];
@@ -123,25 +135,25 @@ const projects = [
               {/* Footer */}
               <div className="px-6 py-4 border-t border-border flex items-center justify-between">
                 <div className="flex gap-4">
-                  <a
-                    href={project.github}
-                    onClick={(e) => e.stopPropagation()}
-                    target="_blank"
-                    className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-cyber-green transition-colors"
-                  >
-                    <Github className="w-4 h-4" />
-                    Code
-                  </a>
-                  {project.demo && (
+                  {project.github ? (
                     <a
-                      href={project.demo}
+                      href={project.github}
                       onClick={(e) => e.stopPropagation()}
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-cyber-green transition-colors"
                     >
-                      <ExternalLink className="w-4 h-4" />
-                      Demo
+                      <Github className="w-4 h-4" />
+                      View GitHub
                     </a>
+                  ) : (
+                    <span
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex items-center gap-1.5 text-sm text-muted-foreground/60 cursor-not-allowed"
+                    >
+                      <Clock className="w-4 h-4" />
+                      Coming Soon
+                    </span>
                   )}
                 </div>
 
