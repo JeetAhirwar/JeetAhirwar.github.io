@@ -9,7 +9,10 @@ import {
   Terminal, 
   Lock,
   Eye,
-  Cpu
+  Cpu,
+  Network,
+  MonitorCog,
+  Code2,
 } from "lucide-react";
 
 const Skills = () => {
@@ -18,52 +21,56 @@ const Skills = () => {
 
   const skillCategories = [
     {
-      title: "Security Tools",
+      title: "SOC Skills",
       icon: Shield,
       skills: [
-        { name: "Splunk", level: 95 },
-        { name: "Microsoft Sentinel", level: 90 },
-        { name: "CrowdStrike", level: 85 },
-        { name: "Wireshark", level: 88 },
+        { name: "SOC Fundamentals", level: "Beginner" },
+        { name: "SIEM Concepts", level: "Beginner" },
+        { name: "Log Analysis", level: "Beginner" },
+        { name: "Incident Response", level: "Beginner" },
+        { name: "Phishing Analysis", level: "Beginner" },
+        { name: "MITRE ATT&CK", level: "Beginner" },
+        { name: "Cyber Kill Chain", level: "Beginner" },
       ],
     },
     {
-      title: "Threat Detection",
+      title: "Security Tools",
       icon: Search,
       skills: [
-        { name: "YARA Rules", level: 85 },
-        { name: "Sigma Rules", level: 90 },
-        { name: "IOC Analysis", level: 92 },
-        { name: "Log Analysis", level: 95 },
+        { name: "Splunk", level: "Beginner" },
+        { name: "Wireshark", level: "Beginner" },
+        { name: "VirusTotal", level: "Beginner" },
+        { name: "Cisco Packet Tracer", level: "Intermediate" },
+        { name: "Nmap", level: "Beginner" },
       ],
     },
     {
-      title: "Incident Response",
-      icon: AlertTriangle,
+      title: "Networking",
+      icon: Network,
       skills: [
-        { name: "Forensics", level: 80 },
-        { name: "Malware Triage", level: 85 },
-        { name: "Root Cause Analysis", level: 88 },
-        { name: "Playbook Dev", level: 90 },
+        { name: "TCP/IP", level: "Intermediate" },
+        { name: "DNS", level: "Intermediate" },
+        { name: "HTTP/HTTPS", level: "Intermediate" },
+        { name: "Common Ports", level: "Intermediate" },
       ],
     },
     {
-      title: "Technical Skills",
-      icon: Terminal,
+      title: "Operating Systems & Programming",
+      icon: Code2,
       skills: [
-        { name: "Python", level: 82 },
-        { name: "PowerShell", level: 88 },
-        { name: "Linux/Bash", level: 85 },
-        { name: "KQL/SPL", level: 92 },
+        { name: "Windows", level: "Intermediate" },
+        { name: "Linux", level: "Intermediate" },
+        { name: "Python", level: "Beginner" },
+        { name: "SQL", level: "Beginner" },
       ],
     },
   ];
 
   const coreCompetencies = [
-    { icon: Eye, label: "Threat Hunting" },
-    { icon: Lock, label: "Access Control" },
-    { icon: Database, label: "SIEM Operations" },
-    { icon: Cpu, label: "Automation" },
+    { icon: Eye, label: "Threat Monitoring" },
+    { icon: AlertTriangle, label: "Incident Response" },
+    { icon: Database, label: "SIEM Concepts" },
+    { icon: Lock, label: "Phishing Analysis" },
   ];
 
   return (
@@ -120,29 +127,29 @@ const Skills = () => {
                 <h3 className="text-lg font-mono font-semibold">{category.title}</h3>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-2.5">
                 {category.skills.map((skill, skillIndex) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between text-sm mb-1.5">
-                      <span className="text-muted-foreground">{skill.name}</span>
-                      <span className="font-mono text-cyber-green">{skill.level}%</span>
-                    </div>
-                    <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={isInView ? { width: `${skill.level}%` } : {}}
-                        transition={{ 
-                          duration: 1, 
-                          delay: 0.5 + catIndex * 0.1 + skillIndex * 0.1,
-                          ease: "easeOut"
-                        }}
-                        className="h-full rounded-full bg-gradient-to-r from-cyber-dim to-cyber-green"
-                        style={{
-                          boxShadow: "0 0 10px hsl(var(--cyber-green) / 0.5)",
-                        }}
-                      />
-                    </div>
-                  </div>
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{
+                      duration: 0.4,
+                      delay: 0.5 + catIndex * 0.1 + skillIndex * 0.05,
+                    }}
+                    className="flex items-center justify-between gap-3 px-3 py-2 rounded-md bg-secondary/40 border border-border/50"
+                  >
+                    <span className="text-sm font-mono text-foreground">{skill.name}</span>
+                    <span
+                      className={`text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full border ${
+                        skill.level === "Intermediate"
+                          ? "bg-cyber-green/15 text-cyber-green border-cyber-green/30"
+                          : "bg-cyber-green/5 text-cyber-green/80 border-cyber-green/20"
+                      }`}
+                    >
+                      {skill.level}
+                    </span>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
