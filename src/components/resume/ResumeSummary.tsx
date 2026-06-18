@@ -8,10 +8,10 @@ const ResumeSummary = () => {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const highlights = [
-    { icon: Shield, text: "SIEM monitoring & alert triage across enterprise environments" },
-    { icon: Activity, text: "Incident response with structured playbook execution" },
-    { icon: Network, text: "Network traffic analysis & protocol-level threat detection" },
-    { icon: FileSearch, text: "Threat intelligence enrichment using open-source feeds" },
+    { icon: Shield, text: "Foundational knowledge of SOC processes, SIEM concepts, and log analysis" },
+    { icon: Activity, text: "Hands-on labs in incident response and phishing investigation" },
+    { icon: Network, text: "Networking fundamentals across Windows and Linux environments" },
+    { icon: FileSearch, text: "Tools: Splunk, Wireshark, Nmap, VirusTotal, Cisco Packet Tracer" },
   ];
 
   return (
@@ -27,9 +27,10 @@ const ResumeSummary = () => {
           <h2 className="text-2xl md:text-3xl font-bold mt-3 mb-4">Professional Summary</h2>
 
           <p className="text-muted-foreground leading-relaxed mb-8 max-w-2xl">
-            Aspiring SOC Analyst with a strong foundation in cybersecurity principles, 
-            hands-on lab experience, and a passion for defending networks against evolving threats. 
-            Eager to apply academic knowledge and self-driven research in a real-world security operations center.
+            Aspiring SOC Analyst with foundational knowledge of SOC processes, SIEM concepts,
+            log analysis, and phishing investigation. Passionate about building practical
+            cybersecurity labs and continuously improving incident detection, investigation,
+            and response capabilities. Seeking opportunities as a SOC Intern or Junior SOC Analyst.
           </p>
 
           <div className="grid sm:grid-cols-2 gap-4">
