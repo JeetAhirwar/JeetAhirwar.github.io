@@ -9,7 +9,7 @@ const About = () => {
 
   const stats = [
     { icon: Briefcase, label: "Years Experience", value: "0+" },
-    { icon: Award, label: "Certifications", value: "4" },
+    { icon: Award, label: "Certifications", value: "6" },
     { icon: MapPin, label: "Location", value: "Bhopal" },
   ];
 
@@ -46,19 +46,23 @@ const About = () => {
 
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                I’m an MCA student with a strong interest in SOC operations and cybersecurity. I’m learning how security alerts are monitored, logs are analyzed, and incidents are identified using SIEM tools and SOC workflows.
+                Aspiring SOC Analyst with foundational knowledge of Security Operations Centre (SOC) processes,
+                SIEM concepts, log analysis, and phishing investigation. Familiar with networking fundamentals,
+                Windows/Linux environments, and security tools including Splunk, Wireshark, Nmap, VirusTotal,
+                and Cisco Packet Tracer.
               </p>
               <p>
-                I have practiced phishing analysis, basic malware understanding, network security concepts, and threat detection through labs, simulations, and self-learning. I enjoy analyzing security events, understanding how attacks happen, and improving my skills step by step.
+                Passionate about building practical cybersecurity labs and continuously improving incident
+                detection, investigation, and response capabilities.
               </p>
               <p>
-                I’m a quick learner, detail-oriented, and motivated to start my career as a SOC Analyst, where I can learn from real-world environments and grow into a strong security professional.
+                Seeking opportunities as a SOC Intern or Junior SOC Analyst.
               </p>
             </div>
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2 mt-6 pt-6 border-t border-border">
-              {["Threat Hunting", "SIEM", "Incident Response", "Malware Analysis", "Blue Team"].map((tag) => (
+              {["SOC", "SIEM", "Incident Response", "Phishing Analysis", "Blue Team"].map((tag) => (
                 <span
                   key={tag}
                   className="px-3 py-1 rounded-full text-xs font-mono bg-secondary text-secondary-foreground"
@@ -98,7 +102,14 @@ const About = () => {
             >
               <p className="text-sm text-muted-foreground mb-3">Certifications</p>
               <div className="space-y-2">
-                {["Junior Cybersecurity Analyst Career Path", "Introduction to Cybersecurity ", "Cybersecurity Essentials ", "Foundations of Cybersecurity "].map((cert) => (
+                {[
+                  "Cisco Junior Cybersecurity Analyst Career Path",
+                  "Cisco Introduction to Cybersecurity",
+                  "Cisco Cybersecurity Essentials",
+                  "Google Foundations of Cybersecurity",
+                  "NIIT Foundation Cyber Security Internship",
+                  "DDU-GKY Business Intelligence Analytics",
+                ].map((cert) => (
                   <div key={cert} className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-cyber-green" />
                     <span className="text-sm font-mono">{cert}</span>
