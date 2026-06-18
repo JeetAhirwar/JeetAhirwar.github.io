@@ -1,12 +1,40 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Download, Mail } from "lucide-react";
 import { HashLink } from "react-router-hash-link";
+
+const RESUME_CANDIDATES = [
+  "/resume/Jeet-Ahirwar-SOC-Resume.pdf",
+  "/resume.pdf",
+];
 
 const ResumeDownloadCTA = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const [resumeUrl, setResumeUrl] = useState<string | null>(null);
+  const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      for (const url of RESUME_CANDIDATES) {
+        try {
+          const res = await fetch(url, { method: "HEAD" });
+          if (res.ok) {
+            if (!cancelled) setResumeUrl(url);
+            break;
+          }
+        } catch {
+          // ignore and try next
+        }
+      }
+      if (!cancelled) setChecked(true);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <section className="py-24" ref={ref}>
@@ -26,14 +54,27 @@ const ResumeDownloadCTA = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="/resume.pdf"
-              download="Jeet_Ahirwar_Resume.pdf"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-cyber-green text-primary-foreground font-mono font-medium transition-all hover:shadow-[0_0_30px_hsl(var(--cyber-green)/0.4)]"
-            >
-              <Download className="w-4 h-4" />
-              Download Resume
-            </a>
+            {resumeUrl ? (
+              <a
+                href={resumeUrl}
+                download="Jeet-Ahirwar-SOC-Resume.pdf"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-cyber-green text-primary-foreground font-mono font-medium transition-all hover:shadow-[0_0_30px_hsl(var(--cyber-green)/0.4)]"
+              >
+                <Download className="w-4 h-4" />
+                Download Resume
+              </a>
+            ) : (
+              <button
+                type="button"
+                disabled
+                aria-disabled="true"
+                title={checked ? "Resume PDF coming soon" : "Checking resume availability…"}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-cyber-green/40 text-primary-foreground/80 font-mono font-medium cursor-not-allowed opacity-70"
+              >
+                <Download className="w-4 h-4" />
+                {checked ? "Resume Coming Soon" : "Download Resume"}
+              </button>
+            )}
             <HashLink
               to="/#contact"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-cyber-green/30 text-foreground font-mono font-medium transition-all hover:bg-cyber-green/10 hover:border-cyber-green/50"

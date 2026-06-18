@@ -6,7 +6,16 @@ const ResumeEducation = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
-  const education = [
+  type EducationItem = {
+    degree: string;
+    institution: string;
+    period: string;
+    status?: string;
+    score?: string;
+    coursework: string[];
+  };
+
+  const education: EducationItem[] = [
     {
       degree: "Master of Computer Applications (Cyber Security)",
       institution: "Amity University Online",
