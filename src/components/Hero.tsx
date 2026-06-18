@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { Shield, Terminal, ChevronDown } from "lucide-react";
+import { Shield, Download, ChevronDown } from "lucide-react";
 
 const Hero = () => {
-  const titleWords = "Security Operations Analyst".split(" ");
-  
+  const titleWords = ["SOC", "Analyst", "/", "Blue", "Team", "Enthusiast"];
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg">
       {/* Ambient glow effects */}
@@ -27,7 +27,7 @@ const Hero = () => {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyber-green/30 bg-cyber-green/5"
             >
               <span className="w-2 h-2 rounded-full bg-cyber-green animate-pulse" />
-              <span className="terminal-text text-cyber-green">Available for opportunities</span>
+              <span className="terminal-text text-cyber-green">Available for Opportunities</span>
             </motion.div>
 
             {/* Main heading */}
@@ -82,8 +82,8 @@ const Hero = () => {
               transition={{ delay: 1 }}
               className="text-lg text-muted-foreground max-w-xl leading-relaxed"
             >
-              Protecting digital assets and hunting threats in the SOC. 
-              Specialized in incident response, threat intelligence, and SIEM operations.
+              Protecting digital environments through proactive threat monitoring,
+              incident investigation, and security operations.
             </motion.p>
 
             {/* CTA buttons */}
@@ -94,11 +94,12 @@ const Hero = () => {
               className="flex flex-wrap gap-4"
             >
               <a
-                href="#contact"
+                href="/resume.pdf"
+                download="Jeet-Ahirwar-SOC-Resume.pdf"
                 className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-cyber-green text-primary-foreground font-mono font-medium transition-all hover:shadow-[0_0_30px_hsl(var(--cyber-green)/0.4)]"
               >
-                <Terminal className="w-4 h-4" />
-                Get in touch
+                <Download className="w-4 h-4" />
+                Download Resume
               </a>
               <a
                 href="#projects"
