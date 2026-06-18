@@ -10,13 +10,14 @@ const ResumeExperience = () => {
     {
       role: "Cyber Security Intern",
       company: "NIIT Foundation",
-      period: "Jun 2025 – July 2025",
+      period: "Jul 2025 – Jul 2025",
       logo: niitLogo,
       highlights: [
-        "Completed foundational training in cybersecurity concepts and SOC fundamentals.",
-        "Gained hands-on exposure to network security using Cisco Packet Tracer.",
-        "Successfully completed Cisco Networking Academy certification courses.",
-        "Applied cybersecurity concepts in a practical network simulation project.",
+        "Completed instructor-led cybersecurity training.",
+        "Learned SOC fundamentals and threat monitoring concepts.",
+        "Performed network simulations using Cisco Packet Tracer.",
+        "Worked on cybersecurity assessments and practical activities.",
+        "Applied cybersecurity concepts in practical security exercises.",
       ],
     },
   ];

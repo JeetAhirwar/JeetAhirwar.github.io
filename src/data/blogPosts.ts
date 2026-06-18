@@ -10,6 +10,137 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "ai-powered-socs",
+    title: "AI-Powered SOCs: How Artificial Intelligence is Transforming Security Operations",
+    summary:
+      "An overview of how Machine Learning, UEBA, SOAR, and Generative AI are reshaping traditional SOCs into faster, smarter, and more autonomous defense operations.",
+    date: "10th Jun 2026",
+    tags: ["AI", "SOC", "Machine Learning", "UEBA", "SOAR", "GenAI"],
+    readTime: "8 min read",
+    content: `## Why SOCs Are Evolving
+
+Traditional SOCs are overwhelmed by alert fatigue, manual triage, and an ever-growing attack surface. AI is being introduced to augment — not replace — human analysts.
+
+## Key AI Capabilities in Modern SOCs
+
+- **Machine Learning** for anomaly detection across logs and network traffic
+- **UEBA** to baseline user behavior and surface deviations
+- **SOAR** to automate repetitive triage, enrichment, and containment
+- **Generative AI** to summarize incidents, draft reports, and assist analysts
+
+## Reducing Alert Fatigue
+
+By correlating signals across SIEM, EDR, identity, and cloud, AI helps analysts focus on what matters — high-fidelity incidents instead of noisy false positives.
+
+## Toward Autonomous SOCs
+
+The future of SOCs leans toward assisted autonomy: AI handling repetitive work, humans handling judgment-heavy investigation and response decisions.
+
+## Takeaway
+
+AI doesn't replace SOC analysts. It removes their bottlenecks so they can focus on real threats.
+`,
+  },
+  {
+    slug: "owasp-top-10-defenders",
+    title: "Understanding OWASP Top 10: Lessons for Modern Defenders",
+    summary:
+      "A defender-focused walkthrough of the OWASP Top 10 (2021), mapping each risk to detection ideas, secure SDLC practices, and practical mitigations.",
+    date: "5th May 2026",
+    tags: ["OWASP", "AppSec", "Secure SDLC", "Blue Team"],
+    readTime: "9 min read",
+    content: `## Why OWASP Top 10 Still Matters
+
+The OWASP Top 10 (2021) remains the baseline for understanding web application risks. For defenders, each item is a signal of what to detect and mitigate.
+
+## Categories Worth Re-reading
+
+- **A01 – Broken Access Control**: enforce least privilege; audit IDOR and forced browsing
+- **A02 – Cryptographic Failures**: enforce TLS, modern algorithms, key management
+- **A03 – Injection**: parameterize queries, validate inputs
+- **A05 – Security Misconfiguration**: harden defaults, restrict admin interfaces
+- **A10 – SSRF**: restrict outbound metadata and internal calls
+
+## Defender Mindset
+
+For each risk, ask: *How would I detect this in logs? What controls reduce blast radius?*
+
+## Secure SDLC
+
+Shift-left scanning, threat modeling, and code review reduce the volume of issues that ever reach production.
+
+## Takeaway
+
+OWASP isn't only for developers — it's a defender's detection map.
+`,
+  },
+  {
+    slug: "colonial-pipeline-ir-lessons",
+    title: "Colonial Pipeline: Incident Response Lessons Learned",
+    summary:
+      "A case study applying the NIST Incident Response Lifecycle to the 2021 Colonial Pipeline ransomware attack — what worked, what didn't, and what defenders can do better.",
+    date: "20th Apr 2026",
+    tags: ["Incident Response", "Ransomware", "NIST", "Case Study"],
+    readTime: "10 min read",
+    content: `## Incident Overview
+
+In May 2021, a ransomware attack against Colonial Pipeline triggered a major fuel supply disruption across the U.S. East Coast. The initial access vector was a compromised VPN account without MFA.
+
+## Mapped to NIST IR Lifecycle
+
+1. **Preparation** — gaps: legacy VPN, missing MFA, limited segmentation
+2. **Detection & Analysis** — attackers active before the ransom note was discovered
+3. **Containment** — full pipeline shutdown as a precaution
+4. **Eradication** — clean rebuilds and credential resets
+5. **Recovery** — phased return to operations with monitoring
+6. **Lessons Learned** — MFA, segmentation, IR readiness, OT/IT boundaries
+
+## Defender Takeaways
+
+- MFA on every remote access path
+- Segment OT from IT and from corporate identity
+- Test IR playbooks against ransomware scenarios
+- Maintain offline, validated backups
+
+## Conclusion
+
+Colonial Pipeline is a reminder that basic hygiene — MFA, segmentation, tested IR — prevents most catastrophic outcomes.
+`,
+  },
+  {
+    slug: "information-security-policy-guide",
+    title: "Building an Information Security Policy: A Practical Guide",
+    summary:
+      "A practical walkthrough of drafting an enterprise information security policy covering access control, data protection, incident response, and remote work security.",
+    date: "1st Apr 2026",
+    tags: ["Policy", "GRC", "Access Control", "Remote Work"],
+    readTime: "7 min read",
+    content: `## Why Policy Matters
+
+Tools detect, but policy directs. A clear information security policy aligns people, processes, and technology.
+
+## Core Sections
+
+- **Access Control** — least privilege, MFA, periodic access reviews
+- **Data Classification** — public, internal, confidential, restricted
+- **Incident Reporting** — who reports what, when, and to whom
+- **Remote Work Security** — endpoint hardening, VPN, secure Wi-Fi
+- **Acceptable Use** — what users may and may not do on company systems
+
+## Writing Style
+
+Policies should be short enough to be read and specific enough to be enforced. Pair each policy with a procedure that tells people *how* to comply.
+
+## Review Cadence
+
+Review at least annually and after major incidents or organizational changes.
+
+## Takeaway
+
+Good policy isn't paperwork — it's the spine of a defensible security program.
+`,
+  },
+  {
   slug: "web-attack-detection-lab1",
   title: "Web Attack Detection Lab: Brute Force Detection using Docker + Ubuntu + Kali",
   summary:

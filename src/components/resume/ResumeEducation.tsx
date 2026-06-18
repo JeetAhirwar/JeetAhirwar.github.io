@@ -6,32 +6,42 @@ const ResumeEducation = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
-  const education = [
+  type EducationItem = {
+    degree: string;
+    institution: string;
+    period: string;
+    status?: string;
+    score?: string;
+    coursework: string[];
+  };
+
+  const education: EducationItem[] = [
     {
-      degree: "Master of Computer Applications (MCA)",
-      specialization: "Cyber Security",
-      institution: "Amity University Online, Noida",
-      period: "2025 – 2027",
+      degree: "Master of Computer Applications (Cyber Security)",
+      institution: "Amity University Online",
+      period: "2025 – 2026",
+      status: "Pursuing",
       coursework: [
-        "SIEM Monitoring & Log Analysis (Splunk)",
-        "Threat Detection & Incident Response",
-        "Advanced Network Security & Traffic Analysis",
-        "Digital Forensics & Malware Analysis",
-        "Cloud & Endpoint Security",
-        "Security Operations Center (SOC) Practices",
+        "SIEM Monitoring",
+        "Incident Response",
+        "Malware Analysis",
+        "Data Security",
+        "Cloud Security",
+        "Security Operations Center Practices",
       ],
     },
     {
       degree: "Bachelor of Computer Applications (BCA)",
-      institution: "Bhabha University, Bhopal",
-      period: "2022 – 2025",
+      institution: "Bhabha University",
+      period: "2020 – 2023",
+      score: "74.94%",
       coursework: [
         "Computer Networks",
         "Operating Systems",
         "Database Management Systems",
         "Web Technologies",
         "Software Engineering",
-        "Linux System Administration",
+        "Programming Fundamentals",
       ],
     },
   ];
@@ -82,20 +92,24 @@ const ResumeEducation = () => {
                       <h3 className="text-lg font-mono font-semibold">
                         {edu.degree}
                       </h3>
-
-                      {edu.specialization && (
-                        <p className="text-sm text-cyber-green font-mono mt-1">
-                          Specialization: {edu.specialization}
-                        </p>
-                      )}
-
                       <p className="text-sm text-muted-foreground font-mono mt-1">
                         {edu.institution}
                       </p>
-
-                      <span className="text-xs font-mono text-muted-foreground bg-secondary px-3 py-1 rounded-full inline-block mt-2">
-                        {edu.period}
-                      </span>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        <span className="text-xs font-mono text-muted-foreground bg-secondary px-3 py-1 rounded-full">
+                          {edu.period}
+                        </span>
+                        {edu.status && (
+                          <span className="text-xs font-mono text-cyber-green bg-cyber-green/10 border border-cyber-green/20 px-3 py-1 rounded-full">
+                            {edu.status}
+                          </span>
+                        )}
+                        {edu.score && (
+                          <span className="text-xs font-mono text-cyber-green bg-cyber-green/10 border border-cyber-green/20 px-3 py-1 rounded-full">
+                            Score: {edu.score}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
 

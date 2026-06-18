@@ -151,9 +151,10 @@ const Contact = () => {
               <div className="space-y-2 text-muted-foreground">
                 <p><span className="text-cyber-green">$</span> cat availability.txt</p>
                 <p className="pl-4">Currently open to:</p>
-                <p className="pl-4 text-foreground">→ Full-time SOC roles</p>
                 <p className="pl-4 text-foreground">→ SOC Intern</p>
-                <p className="pl-4 text-foreground">→ Incident Response Analyst</p>
+                <p className="pl-4 text-foreground">→ SOC Analyst (L1)</p>
+                <p className="pl-4 text-foreground">→ Cybersecurity Analyst</p>
+                <p className="pl-4 text-foreground">→ Incident Response Intern</p>
                 <p className="mt-4"><span className="text-cyber-green">$</span> <span className="animate-blink">_</span></p>
               </div>
             </div>
@@ -178,9 +179,8 @@ const Contact = () => {
             {/* Location */}
             <div className="glass-card p-6">
               <p className="text-sm text-muted-foreground mb-1 font-mono">Location</p>
-              <p className="text-foreground">Madhya Pradesh, India</p>
-              <p className="text-sm text-muted-foreground mt-1">Remote-friendly</p>
-              <p className="text-sm text-muted-foreground mt-1">On-site</p>
+              <p className="text-foreground">Bhopal, Madhya Pradesh, India</p>
+              <p className="text-sm text-muted-foreground mt-1">Remote · Hybrid · On-Site</p>
             </div>
           </motion.div>
         </div>
