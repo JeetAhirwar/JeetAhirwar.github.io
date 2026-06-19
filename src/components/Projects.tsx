@@ -10,6 +10,31 @@ const Projects = () => {
 
 const projects = [
   {
+    title: "Phishing Email Analysis & Incident Investigation",
+    type: "Real-World Phishing Investigation",
+    description:
+      "Conducted an end-to-end phishing investigation using real-world evidence from Malware Traffic Analysis. Performed email header analysis, IOC enrichment, threat intelligence correlation, and Wireshark network forensics to confirm credential harvesting and reconstruct victim activity.",
+    longDescription:
+      "Investigated a real phishing campaign using publicly available evidence from Malware Traffic Analysis. Performed EML extraction, email header analysis, SPF/DKIM/DMARC validation, IOC extraction and enrichment using VirusTotal, AbuseIPDB, Cisco Talos, and WHOIS. Reconstructed victim activity using Wireshark PCAP analysis, confirmed HTTP GET and HTTP POST interactions, validated credential harvesting through network evidence, mapped attacker behavior to MITRE ATT&CK, and documented findings through executive incident reporting.",
+    icon: Mail,
+    tags: [
+      "Wireshark",
+      "Kali Linux",
+      "VirusTotal",
+      "AbuseIPDB",
+      "Cisco Talos",
+      "WHOIS",
+      "MITRE ATT&CK",
+      "Email Header Analysis",
+      "Threat Intelligence",
+      "Network Forensics",
+      "Incident Response",
+      "DFIR",
+    ],
+    github: "https://github.com/JeetAhirwar/Phishing-Email-Incident-Investigation",
+    featured: true,
+  },
+  {
     title: "SIEM Log Analysis & Alert Triage",
     type: "Hands-on Lab",
     description:
@@ -31,18 +56,6 @@ const projects = [
     icon: Shield,
     tags: ["DVWA", "Hydra", "Apache Logs", "Linux", "Threat Detection"],
     github: "https://github.com/JeetAhirwar/Brute-Force-Detection-Splunk-IR-Lab",
-    featured: true,
-  },
-  {
-    title: "Phishing Email Analysis & Incident Investigation",
-    type: "Threat Investigation Lab",
-    description:
-      "Conducted analysis of sample phishing emails to identify malicious indicators and understand email-based threat investigation fundamentals.",
-    longDescription:
-      "Examined email headers, suspicious URLs, sender reputation, and attachment behavior. Used VirusTotal to validate potentially malicious artifacts and documented investigation findings with mitigation recommendations. Status: Learning Project / Case Study.",
-    icon: Lock,
-    tags: ["Phishing Analysis", "Email Header Analysis", "IOC Investigation", "VirusTotal", "Threat Intelligence", "Incident Investigation"],
-    github: null,
     featured: true,
   },
   {

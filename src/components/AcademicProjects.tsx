@@ -4,6 +4,27 @@ import { BookOpen, FileText, ShieldAlert, FileLock } from "lucide-react";
 
 const academicProjects = [
   {
+    icon: ShieldAlert,
+    title: "Investigating Credential Harvesting Through Email and Network Evidence",
+    type: "Technical Investigation",
+    description:
+      "Technical investigation reconstructing a phishing attack lifecycle from email delivery through victim interaction and credential submission using evidence correlation, threat intelligence enrichment, email authentication analysis, and network forensics.",
+    highlights: [
+      "Threat Intelligence",
+      "Email Security",
+      "Network Forensics",
+      "Digital Forensics",
+      "Incident Response",
+      "MITRE ATT&CK",
+      "Credential Harvesting",
+      "Phishing Analysis",
+    ],
+    outcome:
+      "Phishing incidents should be assessed through evidence correlation rather than reputation alone.",
+    button: "View Investigation",
+    link: "https://github.com/JeetAhirwar/Phishing-Email-Incident-Investigation",
+  },
+  {
     icon: BookOpen,
     title: "AI-Powered Security Operations Centers for Modern Threat Detection",
     type: "Minor Project",
@@ -139,15 +160,26 @@ const AcademicProjects = () => {
               </div>
 
               <div className="px-6 py-4 border-t border-border">
-                <button
-                  type="button"
-                  disabled
-                  aria-disabled="true"
-                  className="inline-flex items-center gap-1.5 text-sm font-mono text-cyber-green/80 cursor-not-allowed"
-                  title="Research document coming soon"
-                >
-                  {project.button}
-                </button>
+                {project.link ? (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-mono text-cyber-green hover:text-cyber-green/80 transition-colors"
+                  >
+                    {project.button} →
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    disabled
+                    aria-disabled="true"
+                    className="inline-flex items-center gap-1.5 text-sm font-mono text-cyber-green/80 cursor-not-allowed"
+                    title="Research document coming soon"
+                  >
+                    {project.button}
+                  </button>
+                )}
               </div>
             </motion.div>
           ))}

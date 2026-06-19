@@ -10,6 +10,40 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "phishing-email-incident-investigation",
+    title: "Phishing Email Analysis & Incident Investigation",
+    summary:
+      "A real-world phishing investigation using Malware Traffic Analysis datasets — email header analysis, SPF/DKIM/DMARC validation, IOC enrichment, Wireshark PCAP analysis, MITRE ATT&CK mapping, and confirmation of credential harvesting through HTTP POST analysis.",
+    date: "June 2026",
+    tags: [
+      "Phishing",
+      "DFIR",
+      "Wireshark",
+      "Threat Intelligence",
+      "MITRE ATT&CK",
+      "Incident Response",
+      "SOC Analyst",
+    ],
+    readTime: "10-15 min read",
+    content: `## Overview
+
+A real-world phishing investigation conducted using Malware Traffic Analysis datasets. The investigation involved email header analysis, SPF/DKIM/DMARC validation, IOC enrichment, Wireshark PCAP analysis, MITRE ATT&CK mapping, and confirmation of credential harvesting through HTTP POST analysis.
+
+## Key Learnings
+
+- Email authentication failures can reveal phishing attempts.
+- IOC enrichment improves investigation confidence.
+- Threat intelligence should be correlated with evidence.
+- Network traffic reconstruction validates attack progression.
+- Credential harvesting can be confirmed using HTTP analysis.
+- MITRE ATT&CK mapping improves adversary understanding.
+
+## Full Case Study
+
+Read the complete case study on GitHub: [Phishing-Email-Incident-Investigation](https://github.com/JeetAhirwar/Phishing-Email-Incident-Investigation)
+`,
+  },
+  {
     slug: "ai-powered-socs",
     title: "AI-Powered SOCs: How Artificial Intelligence is Transforming Security Operations",
     summary:

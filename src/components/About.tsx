@@ -46,17 +46,11 @@ const About = () => {
 
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Aspiring SOC Analyst with foundational knowledge of Security Operations Centre (SOC) processes,
-                SIEM concepts, log analysis, and phishing investigation. Familiar with networking fundamentals,
-                Windows/Linux environments, and security tools including Splunk, Wireshark, Nmap, VirusTotal,
-                and Cisco Packet Tracer.
-              </p>
-              <p>
-                Passionate about building practical cybersecurity labs and continuously improving incident
-                detection, investigation, and response capabilities.
-              </p>
-              <p>
-                Seeking opportunities as a SOC Intern or Junior SOC Analyst.
+                I am an MCA student specializing in Cyber Security with a strong interest in Security
+                Operations (SOC), Incident Response, Threat Detection, and Digital Forensics. I enjoy
+                building hands-on cybersecurity projects that simulate real-world attack scenarios and
+                strengthen my practical investigation skills. My goal is to begin my career as a SOC
+                Analyst and continuously grow in Blue Team operations.
               </p>
             </div>
 
